@@ -45,8 +45,6 @@ void mergeSort(int input[],int size){
     return;
 }
 
-
-
 int main() {
   int length;
   cin >> length;
