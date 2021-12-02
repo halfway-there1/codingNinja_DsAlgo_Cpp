@@ -72,6 +72,8 @@ void printLevelATNewLine(BinaryTreeNode<int>* root) {
     }
 }
 
+
+// ----------------------------------------------------------------------------------
 void insertDuplicateNode(BinaryTreeNode<int> *root) {
     if (root == nullptr) {
         return;
@@ -83,6 +85,7 @@ void insertDuplicateNode(BinaryTreeNode<int> *root) {
     root->left = duplicate;
     duplicate->left = modifiedLeft;
 }
+// ----------------------------------------------------------------------------------
 
 int main() {
     BinaryTreeNode<int>* root = takeInput();
