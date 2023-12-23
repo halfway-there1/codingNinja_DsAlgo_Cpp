@@ -12,7 +12,7 @@ int countStepsTo1(int n) {
     int option2 = (n % 2 == 0) ? countStepsTo1(n / 2) : INT_MAX;
     int option3 = (n % 3 == 0) ? countStepsTo1(n / 3) : INT_MAX;
 
-    return min(min(option1, option2), option3) + 1;
+    return min({option1, option2, option3}) + 1;
 }
 
 // -----------------------------------------------------------------------
