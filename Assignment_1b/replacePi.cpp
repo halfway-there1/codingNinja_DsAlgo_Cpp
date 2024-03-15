@@ -3,21 +3,17 @@
 #include <cstring>
 using namespace std;
 
+const char *pi = "3.14";
+
 void replacePi(char *input, int size) {
     if (size <= 1) {
         return;
     }
     
     if (input[0] == 'p' && input[1] == 'i') {
-        for (int i = size; i > 1; i--) {
-            input[i + 2] = input[i];
-        }
-        input[0] = '3';
-        input[1] = '.';
-        input[2] = '1';
-        input[3] = '4';
-        size = size + 2; // size is increased by 2 if 'pi' is replaced by 3.14
-        replacePi(input + 4, size - 4);
+        memmove(input + 4, input + 2, size - 2);
+        memmove(input, pi, 4);
+        replacePi(input + 4, size - 2);
         return;
     }
     
@@ -25,7 +21,6 @@ void replacePi(char *input, int size) {
 }
 
 void replacePi(char input[]) {
-    // Write your code here
     int l = strlen(input);
     replacePi(input, l);
 }
