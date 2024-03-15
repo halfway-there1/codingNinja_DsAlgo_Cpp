@@ -14,7 +14,7 @@ void replacePi(char* input, int size){
         input[1] = '.';
         input[2] = '1';
         input[3] = '4';
-        size = size+2;
+        size = size+2;  // size is increased by 2 if 'pi' is replaced by 3.14
         replacePi(input+4,size-4);
         return;
     }
