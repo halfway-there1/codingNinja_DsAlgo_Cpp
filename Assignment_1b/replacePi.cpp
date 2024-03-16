@@ -11,7 +11,7 @@ void replacePi(char *input, int size) {
     }
     
     if (input[0] == 'p' && input[1] == 'i') {
-        memmove(input + 4, input + 2, size - 2);
+        memmove(input + 4, input + 2, size - 2 + 1);
         memmove(input, pi, 4);
         replacePi(input + 4, size - 2);
         return;
