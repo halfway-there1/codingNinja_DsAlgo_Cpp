@@ -7,32 +7,23 @@ void arrayInput(int arr[], int size) {
     }
 }
 
-void fill(int arr3[], int arr[], int *addressUntil) {
-    int i = 0;
-    while (&arr[i] <= addressUntil) {
-        arr3[i] = arr[i];
-        i++;
-    }
-}
-
 void merge(int arr1[], int arr2[], int n, int m, int arr3[]) {
-    int i = 0, j = 0;
+    int i = 0, j = 0, k = 0;
     while (i < n && j < m) {
         if (arr1[i] <= arr2[j]) {
-            *arr3 = arr1[i];
+            arr3[k] = arr1[i];
             i++;
         } else {
-            *arr3 = arr2[j];
+            arr3[k] = arr2[j];
             j++;
         }
-        arr3++;
+        
+        k++;
     }
     
-    if (i == n) {
-        fill(arr3, &arr2[j], &arr2[m - 1]);
-    } else {
-        fill(arr3, &arr1[i], &arr1[n - 1]);
-    }
+    while (i < n) arr3[k++] = arr1[i++];
+    
+    while (j < m) arr3[k++] = arr2[j++];
 }
 
 int main() {
