@@ -28,6 +28,32 @@ void merge_sorted_segments(vi &v, int si, int mid, int ei) {
     }
 }
 
+void merge_sorted_segments2(vi &v, int si, int mid, int ei) {
+    int i = si, j = mid + 1;
+
+    vi temp(ei - si + 1);
+    int k = 0;
+
+    while (i <= mid && j <= ei) {
+        if (v[i] <= v[j])
+            temp[k++] = v[i++];
+        else
+            temp[k++] = v[j++];
+    }
+
+    while (i <= mid) {
+        temp[k++] = v[i++];
+    }
+
+    while (j <= ei) {
+        temp[k++] = v[j++];
+    }
+
+    for (int k = 0; k < temp.size(); k++) {
+        v[k + si] = temp[k];
+    }
+}
+
 void merge_sort(vi &v, int si, int ei) {
     if (si >= ei)
         return;
@@ -37,7 +63,8 @@ void merge_sort(vi &v, int si, int ei) {
     merge_sort(v, mid + 1, ei);
 
     // the segments being v[si...mid] and v[mid+1...ei]
-    merge_sorted_segments(v, si, mid, ei);
+    // merge_sorted_segments(v, si, mid, ei);
+    merge_sorted_segments2(v, si, mid, ei);
 }
 
 void solve() {
