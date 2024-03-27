@@ -1,26 +1,27 @@
 #include <iostream>
 using namespace std;
 
-void printSubsetsOfArray(int input[], int size, int output[]) {
-    if (size <= 0) {
-        for (int i = 1; i < output[0] + 1; i++) {
-            cout << output[i] << " ";
+int k = 0;
+void printSubsetsOfArray(int input[], int n, int curr_subset[], int idx) {
+    if (idx == n) {
+        for (int i = 0; i < k; i++) {
+            cout << curr_subset[i] << " ";
         }
         cout << endl;
+        
         return;
     }
-
-    int length = output[0];
-    printSubsetsOfArray(input + 1, size - 1, output);
-    output[0] = length + 1;
-    output[length + 1] = input[0];
-    printSubsetsOfArray(input + 1, size - 1, output);
+    
+    printSubsetsOfArray(input, n, curr_subset, idx + 1);
+    
+    curr_subset[k++] = input[idx];
+    printSubsetsOfArray(input, n, curr_subset, idx + 1);
+    k--;
 }
-
 
 void printSubsetsOfArray(int input[], int size) {
     int output[10] = {0};
-    printSubsetsOfArray(input, size, output);
+    printSubsetsOfArray(input, size, output, 0);
 }
 
 int main() {
