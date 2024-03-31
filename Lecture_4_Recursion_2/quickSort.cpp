@@ -4,23 +4,22 @@ using namespace std;
 
 int partition(int input[], int si, int ei) {
     int pivot = input[si];
-    int actual_pivotIndex = si;
 
+    // counting how many nums are bigger than pivot
+    int cnt = 0;
+    for (int i = si + 1; i <= ei; i++) cnt += (pivot >= input[i]);
+    
     // placing the pivot at its right index.
-    for (int i = si + 1; i <= ei; i++) {
-        if (input[i] <= pivot) {
-            actual_pivotIndex++;
-        }
-    }
-    swap(input[si], input[actual_pivotIndex]);
+    int pivotIndex = si + cnt;
+    swap(input[si], input[pivotIndex]);
+    
 
     // partitioning process.
-    for (int i = si, j = ei; i < actual_pivotIndex && j > actual_pivotIndex;) {
-        if (!(input[i] <= pivot)) {
-            if (!(input[j] > pivot)) {
+    for (int i = si, j = ei; i < pivotIndex && j > pivotIndex;) {
+        if (input[i] > pivot) {
+            if (input[j] <= pivot) {
                 swap(input[i], input[j]);
-                i++;
-                j--;
+                i++, j--;
             } else {
                 j--;
             }
@@ -32,7 +31,7 @@ int partition(int input[], int si, int ei) {
         }
     }
 
-    return actual_pivotIndex;
+    return pivotIndex;
 }
 
 void quickSort(int input[], int si, int ei) {
@@ -40,11 +39,9 @@ void quickSort(int input[], int si, int ei) {
         return;
     }
 
-    int actual_pivotIndex = partition(input, si, ei);
-    quickSort(input, si, actual_pivotIndex - 1);
-    quickSort(input, actual_pivotIndex + 1, ei);
-
-    return;
+    int pivotIndex = partition(input, si, ei);
+    quickSort(input, si, pivotIndex - 1);
+    quickSort(input, pivotIndex + 1, ei);
 }
 
 void quickSort(int input[], int size) {
